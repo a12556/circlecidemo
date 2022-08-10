@@ -8,7 +8,9 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SCIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
+      CCCC_A: MY NAME IS THANH
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
-      - run: echo $SCIRCLE_COMPARE_URL
+      - run: echo $SCIRCLE_COMPARE_URL 
+      - run: echo $CCCC_A
