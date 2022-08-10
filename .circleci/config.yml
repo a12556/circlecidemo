@@ -1,25 +1,11 @@
-# .circleci/config.yml
 version: 2.1
-
 jobs:
-  build-medium:
-    machine:
-      image: ubuntu-2004:202101-01
-    resource_class: arm.medium
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-  build-large:
-    machine:
-      image: ubuntu-2004:202101-01
-    resource_class: arm.large
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-workflows:
   build:
-    jobs:
-      - build-medium
-      - build-large
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
