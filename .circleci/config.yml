@@ -6,7 +6,9 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      SCIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
-      - run: echo "My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >>"
+      - run: echo $SCIRCLE_COMPARE_URL
